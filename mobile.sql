@@ -44,6 +44,31 @@ INSERT INTO `accounts` VALUES (1,1,'test','admin');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `category` (
+  `category_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` tinyint(2) DEFAULT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `category`
+--
+
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES (1,'Nokia',1),(2,'Samsung',1);
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `customers`
 --
 
@@ -224,9 +249,11 @@ CREATE TABLE `products` (
   `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `amount` int(11) DEFAULT NULL,
   `description` text COLLATE utf8_unicode_ci,
-  `brand_name` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `category_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`product_id`),
+  KEY `fk_products_1_idx` (`category_id`),
+  CONSTRAINT `fk_products_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,7 +262,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Samsung J2','4.jpg',5000000,NULL,'Samsung'),(2,'Samsung J3 Primer','2.jpg',10000000,NULL,'Samsung'),(3,'Nokia X2-00','7.jpg',10000000,'Old','Nokia'),(4,'Samsung Galaxy J7 Pro','samsungj7.jpg',6990000,'Samsung Galaxy J7 Pro là một chiếc smartphone phù hợp với những người yêu thích một sản phẩm pin tốt, thích hệ điều hành mới cùng những tính năng đi kèm độc quyền của Samsung.','Samsung');
+INSERT INTO `products` VALUES (1,'Samsung J2','4.jpg',5000000,NULL,2),(2,'Samsung J3 Primer','2.jpg',10000000,NULL,NULL),(3,'Nokia X2-00','7.jpg',10000000,'Old',NULL),(4,'Samsung Galaxy J7 Pro','samsungj7.jpg',6990000,'Samsung Galaxy J7 Pro là một chiếc smartphone phù hợp với những người yêu thích một sản phẩm pin tốt, thích hệ điều hành mới cùng những tính năng đi kèm độc quyền của Samsung.',NULL),(5,'OPPO F3','oppo-f3-3-400x460-400x460.png',6490000,'OPPO F3 là biến thể nhỏ gọn hơn của OPPO F3 Plus, nổi bật với camera selfie kép phía trước với 2 cảm biến 16 MP và 8 MP, hỗ trợ chụp ảnh selfie góc rộng rất tốt.',NULL),(6,'OPPO F3','oppo-f3-3-400x460-400x460.png',6490000,'Cuối cùng thì mẫu \"chuyên gia selfie\" mới OPPO F3 cũng đã chính thức được trình làng với cụm camera trước kép trang bị nhiều tính năng selfie tuyệt vời hứa hẹn sẽ đem đến trải nghiệm đáng giá cho người dùng.',NULL),(7,'OPPO F5 ','oppo-f1s-hero-400x460-400x460.png',6990000,NULL,NULL);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,4 +299,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-29 17:53:28
+-- Dump completed on 2017-12-05 17:38:21

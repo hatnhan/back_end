@@ -5,14 +5,15 @@
  */
 package com.ifisolution.repository;
 
-import com.ifisolution.entity.Products;
-import java.util.List;
+import com.ifisolution.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author johnny
  */
-public interface ProductsRepository extends JpaRepository<Products, Integer>{
-        List<Products> findByCategoryCategoryId(Integer id);
+@Repository
+public interface CategoryRepository extends JpaRepository<Category, Integer>{
+        
 }

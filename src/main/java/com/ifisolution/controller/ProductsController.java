@@ -43,7 +43,7 @@ public class ProductsController {
 
        @PostMapping(value = "products", produces = "text/plain;charset=UTF-8")
         public String create(@RequestBody Products products) {
-                if(products.getProductName()== null || products.getImage()== null || products.getAmount()== null || products.getBrandName()== null)
+                if(products.getProductName()== null || products.getImage()== null || products.getAmount()== null || products.getCategory().getCategoryId()== null)
                         return "Can not add";
                 productsRepository.save(products);
                 return "Success";
@@ -51,7 +51,7 @@ public class ProductsController {
 
         @PutMapping(value = "products", produces = "text/plain;charset=UTF-8")
         public String update(@RequestBody Products products) {
-                if(products.getProductId() == null || products.getProductName()== null || products.getImage()== null || products.getAmount()== null || products.getBrandName()== null)
+                if(products.getProductId() == null || products.getProductName()== null || products.getImage()== null || products.getAmount()== null || products.getCategory().getCategoryId()== null)
                         return "Can not add";
                 if (getById(products.getProductId()) == null) {
                         return "Not Found ID";
